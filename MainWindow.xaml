@@ -1,0 +1,23 @@
+﻿<NavigationWindow x:Class="WpfGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfGame"
+        mc:Ignorable="d"
+        Title="Game" Height="600" Width="800" WindowStartupLocation="CenterScreen"
+        Background="Brown"
+        ShowsNavigationUI="False">
+    <NavigationWindow.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="20"/>
+        </Style>
+    </NavigationWindow.Resources>
+    <NavigationWindow.Content>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+            <Button x:Name="battleButton" Content="Бой? (Тест) (не готово)" Click="Battle_Click" IsEnabled="False"/>
+            <Button Content="Задать игрока (нового)" Click="AddPlayer_Click"/>
+            <Button Content="3"/>
+        </StackPanel>
+    </NavigationWindow.Content>
+</NavigationWindow>

@@ -1,0 +1,65 @@
+﻿<Page x:Class="WpfGame.CreatePlayer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfGame"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CreatePlayer">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="30"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Игрок 1" Grid.Column="0" Grid.Row="0"/>
+        <TextBlock Text="Игрок 2" Grid.Column="1" Grid.Row="0"/>
+        <ComboBox Grid.Row="1" Grid.Column="0" x:Name="race1">
+            <ComboBoxItem IsSelected="True">
+                <TextBlock Text="Люди"/>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <TextBlock Text="Эльфы"/>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <TextBlock Text="Демоны"/>
+            </ComboBoxItem>
+        </ComboBox>
+        <ComboBox Grid.Row="1" Grid.Column="1" x:Name="race2">
+            <ComboBoxItem>
+                <TextBlock Text="Люди"/>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <TextBlock Text="Эльфы"/>
+            </ComboBoxItem>
+            <ComboBoxItem IsSelected="True">
+                <TextBlock Text="Демоны"/>
+            </ComboBoxItem>
+        </ComboBox>
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <TextBlock Text="Управление будет от:"/>
+            <RadioButton GroupName="player1" Content="Игрок" IsChecked="True"/>
+            <RadioButton GroupName="player1" Content="ИИ"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock Text="Управлять будет:"/>
+            <RadioButton GroupName="player2" Content="Игрок" IsChecked="True"/>
+            <RadioButton GroupName="player2" Content="ИИ"/>
+        </StackPanel>
+        <TextBox Grid.Row="3" Grid.Column="0" Text="Имя игрока" x:Name="nick1"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="Имя игрока" x:Name="nick2"/>
+        <Button Content="Сохранить и уйти отсюдова" Grid.Row="4" Grid.ColumnSpan="2" Click="Return_Click"/>
+    </Grid>
+</Page>
