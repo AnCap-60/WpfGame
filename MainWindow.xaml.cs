@@ -25,6 +25,7 @@ namespace WpfGame
         private void Battle_Click(object sender, RoutedEventArgs e)
         {
             Navigate(new Uri("Battle.xaml", UriKind.Relative));
+            //popka
         }
 
         private void AddPlayer_Click(object sender, RoutedEventArgs e)
