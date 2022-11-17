@@ -17,7 +17,7 @@ namespace WpfGame
         public MainWindow()
         {
             InitializeComponent();
-            //pivo
+            //pivo so snekami
 
             Application.Current.Resources.Add("Players", new List<IPlayer>(2));
         }
