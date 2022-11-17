@@ -17,6 +17,7 @@ namespace WpfGame
         public MainWindow()
         {
             InitializeComponent();
+            //pivo
 
             Application.Current.Resources.Add("Players", new List<IPlayer>(2));
         }
