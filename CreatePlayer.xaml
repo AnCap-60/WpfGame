@@ -8,11 +8,13 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CreatePlayer">
     <Page.Resources>
+        <local:CreatePlayerViewModel x:Key="vm"/>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="30"/>
         </Style>
+        <local:RaceToTextConverter x:Key="RaceConverter"/>
     </Page.Resources>
-    <Grid>
+    <Grid DataContext="{StaticResource vm}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -26,40 +28,36 @@
         </Grid.RowDefinitions>
         <TextBlock Text="Игрок 1" Grid.Column="0" Grid.Row="0"/>
         <TextBlock Text="Игрок 2" Grid.Column="1" Grid.Row="0"/>
-        <ComboBox Grid.Row="1" Grid.Column="0" x:Name="race1">
-            <ComboBoxItem IsSelected="True">
-                <TextBlock Text="Люди"/>
-            </ComboBoxItem>
-            <ComboBoxItem>
-                <TextBlock Text="Эльфы"/>
-            </ComboBoxItem>
-            <ComboBoxItem>
-                <TextBlock Text="Демоны"/>
-            </ComboBoxItem>
+        <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Races}" SelectedValue="{Binding SelectedRace1}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource RaceConverter}}" FontSize="30"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox Grid.Row="1" Grid.Column="1" x:Name="race2">
-            <ComboBoxItem>
-                <TextBlock Text="Люди"/>
-            </ComboBoxItem>
-            <ComboBoxItem>
-                <TextBlock Text="Эльфы"/>
-            </ComboBoxItem>
-            <ComboBoxItem IsSelected="True">
-                <TextBlock Text="Демоны"/>
-            </ComboBoxItem>
+        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Races}" SelectedValue="{Binding SelectedRace2}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource RaceConverter}}" FontSize="30"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
         <StackPanel Grid.Row="2" Grid.Column="0">
-            <TextBlock Text="Управление будет от:"/>
-            <RadioButton GroupName="player1" Content="Игрок" IsChecked="True"/>
-            <RadioButton GroupName="player1" Content="ИИ"/>
+            <TextBlock Text="Управлять будет:"/>
+            <RadioButton GroupName="player1" x:Name="rb1Player" Content="Игрок" Command="{Binding CheckCommand1}" IsChecked="True"
+                         CommandParameter="{Binding ElementName=rb1Player, Path=Content}"/>
+            <RadioButton GroupName="player1" x:Name="rb1Bot" Content="ИИ" Command="{Binding CheckCommand1}"
+                         CommandParameter="{Binding ElementName=rb1Bot, Path=Content}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1">
             <TextBlock Text="Управлять будет:"/>
-            <RadioButton GroupName="player2" Content="Игрок" IsChecked="True"/>
-            <RadioButton GroupName="player2" Content="ИИ"/>
+            <RadioButton GroupName="player2" x:Name="rb2Player" Content="Игрок" Command="{Binding CheckCommand2}"
+                         CommandParameter="{Binding ElementName=rb2Player, Path=Content}"/>
+            <RadioButton GroupName="player2" x:Name="rb2Bot" Content="ИИ" Command="{Binding CheckCommand2}" IsChecked="True"
+                         CommandParameter="{Binding ElementName=rb2Bot, Path=Content}"/>
         </StackPanel>
-        <TextBox Grid.Row="3" Grid.Column="0" Text="Имя игрока" x:Name="nick1"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Text="Имя игрока" x:Name="nick2"/>
-        <Button Content="Сохранить и уйти отсюдова" Grid.Row="4" Grid.ColumnSpan="2" Click="Return_Click"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Nick1}"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Nick2}"/>
+        <Button Content="Сохранить и уйти отсюдова" Grid.Row="4" Grid.ColumnSpan="2" Command="{Binding ReturnCommand}"/>
     </Grid>
 </Page>

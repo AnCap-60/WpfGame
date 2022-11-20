@@ -22,5 +22,10 @@ namespace WpfGame
         {
             
         }
+
+        public override string ToString()
+        {
+            return $"{Name}\n{Race}\n{Army.Count} units";
+        }
     }
 }
