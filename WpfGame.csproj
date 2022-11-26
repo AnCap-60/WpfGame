@@ -10,16 +10,22 @@
   <ItemGroup>
     <None Remove="images\battlefield.png" />
     <None Remove="images\orange.png" />
+    <None Remove="images\orangeIcon.png" />
     <None Remove="images\red.png" />
+    <None Remove="images\redIcon.png" />
     <None Remove="images\yellow.png" />
+    <None Remove="images\yellowIcon.png" />
     <None Remove="yellow.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="images\battlefield.png" />
     <Resource Include="images\orange.png" />
+    <Resource Include="images\orangeIcon.png" />
     <Resource Include="images\red.png" />
+    <Resource Include="images\redIcon.png" />
     <Resource Include="images\yellow.png" />
+    <Resource Include="images\yellowIcon.png" />
   </ItemGroup>
 
 </Project>

@@ -13,10 +13,13 @@ namespace WpfGame
             Race = race;
         }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         public List<Unit> Army { get; set; }
-        public IPlayer.race Race { get; set; }
+
+        public IPlayer.race Race { get; private set; }
+
+        public string Info => ToString();
 
         public void Turn()
         {

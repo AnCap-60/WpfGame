@@ -1,22 +1,17 @@
 ﻿using System.Windows;
 using System.Collections.Generic;
-using System.Windows.Controls;
 using System;
-using System.Windows.Media;
 
 namespace WpfGame
 {
     internal class Field
     {
-        public Field(Grid _grid, int _rows, int _cols)
+        public Field(int _rows, int _cols)
         {
-            grid = _grid;
             logicField = new Unit[_rows, _cols];
             Rows = _rows;
             Columns = _cols;
         }
-
-        readonly Grid grid;
 
         private int rows;
         public int Rows
@@ -25,14 +20,6 @@ namespace WpfGame
             set
             {
                 if (value == rows) return;
-
-                else if (value > rows)
-                    for (int i = grid.RowDefinitions.Count; i < value; i++)
-                        grid.RowDefinitions.Add(new());
-
-                else
-                    for (int i = grid.RowDefinitions.Count; i > value; i--)
-                        grid.RowDefinitions.RemoveAt(i - 1);
 
                 rows = value;
 
@@ -47,14 +34,6 @@ namespace WpfGame
             set
             {
                 if (value == cols) return;
-
-                else if (value > cols)
-                    for (int i = grid.ColumnDefinitions.Count; i < value; i++)
-                        grid.ColumnDefinitions.Add(new());
-
-                else
-                    for (int i = grid.ColumnDefinitions.Count; i > value; i--)
-                        grid.ColumnDefinitions.RemoveAt(i - 1);
 
                 cols = value;
 
@@ -80,8 +59,6 @@ namespace WpfGame
             logicField[row, col] = unit;
             unit.Row = row;
             unit.Column = col;
-            Grid.SetRow(unit.texture, row);
-            Grid.SetColumn(unit.texture, col);
         }
 
         public void MoveUnitTo(Unit unit, int row, int col)
@@ -96,36 +73,11 @@ namespace WpfGame
         public void RemoveUnit(Unit unit)
         {
             logicField[unit.Row, unit.Column] = null;
-            grid.Children.Remove(unit.texture);
-        }
-
-        public void SpawnUnitTo(string type, int row, int col)
-        {
-            Unit unit = null;
-
-            switch (type)
-            {
-                case "Red":
-                    unit = new MeleeUnit(type);
-                    break;
-                case "Orange":
-                    unit = new MeleeUnit(type);
-                    break;
-                case "Yellow":
-                    unit = new RangeUnit(type);
-                    break;
-                default:
-                    break;
-            }
-
-            PlaceUnitTo(unit, row, col);
-            grid.Children.Add(unit.texture);
         }
 
         public void SpawnUnitTo(Unit unit, int row, int col)
         {
             PlaceUnitTo(unit, row, col);
-            grid.Children.Add(unit.texture);
         }
 
         public void IlluminateCells(bool[,] cellsCanGoTo)
@@ -146,10 +98,10 @@ namespace WpfGame
         public void FillField(List<Unit> army1, List<Unit> army2)
         {
             for (int i = 0; i < army1.Count; i++)
-                SpawnUnitTo(army1[i], i, 0);
+                SpawnUnitTo(army1[i], i % Rows, i / Rows);
 
             for (int i = 0; i < army2.Count; i++)
-                SpawnUnitTo(army2[i], i, Columns - 1); //to last column
+                SpawnUnitTo(army2[i], i % Rows, Columns - 1 - (i / Rows)); //to last column
         }
     }
 }

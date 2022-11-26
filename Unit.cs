@@ -29,7 +29,7 @@ namespace WpfGame
             icon = new Image
             {
                 Margin = new Thickness(12),
-                Source = new BitmapImage(new Uri($"/images/{type}.png", UriKind.Relative))
+                Source = new BitmapImage(new Uri($"/images/{type}Icon.png", UriKind.Relative))
             }; // пока не найдём норм иконки будет копия текстуры
 
             Armor = 1;
@@ -107,9 +107,9 @@ namespace WpfGame
 
         readonly Type type;
 
-        public readonly Image texture;
+        public Image texture { get; private set; }
 
-        public readonly Image icon;
+        public Image icon { get; private set; }
 
         public int Row { get; set; }
 

@@ -13,7 +13,7 @@ namespace WpfGame
             Races = new IPlayer.race[] { IPlayer.race.People, IPlayer.race.Elves, IPlayer.race.Demons };
         }
 
-        public IPlayer.race[] Races { get; set; }
+        public IPlayer.race[] Races { get; private set; }
 
         public IPlayer.race SelectedRace1
         {

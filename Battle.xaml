@@ -9,41 +9,73 @@
       Title="Battle"
       x:Name="BattlePage">
     <Page.Resources>
+        <local:BattleViewModel x:Key="vm"/>
         <SolidColorBrush x:Key="greenCell" Color="LightGreen" Opacity="0.3"/>
         <ImageBrush x:Key="battlefield1" ImageSource="/images/battlefield.png"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <DataTemplate x:Key="TexturePresenter">
+            <ContentPresenter Content="{Binding texture}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="TexturePresenter1">
+            <ContentPresenter Content="{Binding icon}"/>
+        </DataTemplate>
     </Page.Resources>
 
-    <DockPanel Background="{StaticResource battlefield1}">
+    <DockPanel Background="{StaticResource battlefield1}" DataContext="{StaticResource vm}">
         <DockPanel x:Name="PlayersBar" DockPanel.Dock="Top" MinHeight="70">
-            <DockPanel>
-                
-            </DockPanel>
+            <TextBlock Text="{Binding Player1.Info}"/>
+            <TextBlock Text="{Binding Player2.Info}" HorizontalAlignment="Right"/>
         </DockPanel>
         <DockPanel x:Name="OrderOfUnitsAndSomeButtons" DockPanel.Dock="Bottom">
-            <WrapPanel x:Name="Buttons" DockPanel.Dock="Right" Width="200">
-                <Button Content="+Строку" Click="AddRow_Click"/>
-                <Button Content="прокрутить порядок" Click="Next_Click"/>
-                <Button Content="ovca"/>
+            <WrapPanel x:Name="Buttons" DockPanel.Dock="Right">
+                <Button Content="+Строку"/>
+                <Button Content="прокрутить порядок"/>
+                <Button Content="ovca" Command="{Binding OvcaCommand}"/>
             </WrapPanel>
-            <StackPanel x:Name="OrderOfUnits" Orientation="Horizontal" DockPanel.Dock="Left" MaxHeight="100" Margin="10">
-                
-            </StackPanel>
+            <DockPanel Background="Transparent">
+                <Image Source="{Binding CurrentUnit.icon.Source}" DockPanel.Dock="Left" Width="70"/>
+                <ListBox ItemsSource="{Binding Order, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" ItemTemplate="{StaticResource TexturePresenter}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </DockPanel>
         </DockPanel>
-        <Grid x:Name="gridField" ShowGridLines="True" Margin="20">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-        </Grid>
+        <ItemsControl ItemsSource="{Binding AllUnits}" ItemTemplate="{StaticResource TexturePresenter1}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid ShowGridLines="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Grid.Row" Value="{Binding Row}"/>
+                    <Setter Property="Grid.Column" Value="{Binding Column}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
     </DockPanel>
 </Page>

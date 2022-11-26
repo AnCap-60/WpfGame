@@ -4,7 +4,7 @@ namespace WpfGame
 {
     internal interface IPlayer
     {
-        string Name { get; set; }
+        string Name { get; }
 
         void Turn();
 
@@ -17,6 +17,8 @@ namespace WpfGame
             Demons
         }
 
-        race Race { get; set; }
+        race Race { get; }
+
+        string Info { get; }
     }
 }
